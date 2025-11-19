@@ -343,8 +343,27 @@
             toggleTabs('details');
         });
         
+        const getProjectsRoot = () => {
+            const marker = "/projects/";
+            const cleanHref = window.location.href.split("#")[0].split("?")[0];
+            const idx = cleanHref.indexOf(marker);
+
+            if (idx === -1) {
+                const origin = window.location.origin && window.location.origin !== "null"
+                    ? window.location.origin
+                    : "";
+                return origin + marker;
+            }
+
+            return cleanHref.substring(0, idx + marker.length);
+        };
+
+        const projectsRootPath = getProjectsRoot();
+
         function locatePanelItem(panelItem) {
-            window.location.href = "../" + panelItem + "/";
+            if (!panelItem) return;
+            const normalized = panelItem.replace(/^\/+|\/+$/g, "");
+            window.location.href = projectsRootPath + normalized + "/";
         }
     </script>
 </body>
