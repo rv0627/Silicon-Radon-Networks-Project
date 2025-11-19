@@ -1,0 +1,13 @@
+{
+  "rewrites": [
+    {
+      "source": "/main-panel/:page(addProject|projectList|editProject)",
+      "destination": "/main-panel/projects/:page"
+    },
+    {
+      "source": "/main-panel/:page(addProject|projectList|editProject)/",
+      "destination": "/main-panel/projects/:page/"
+    }
+  ]
+}
+
