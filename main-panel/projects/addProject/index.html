@@ -259,11 +259,13 @@
                     <div class="md:col-span-2 mb-1">
                         <label class="form-label">Client Signature</label>
                         <div class="flex flex-col gap-3">
-                            <div class="flex gap-3 flex-wrap">
+                            <div class="flex gap-3 flex-wrap items-center">
                                 <button type="button" onclick="openSignaturePopup()"
                                     class="px-4 py-2 bg-[#134E5E] text-white rounded-lg hover:bg-[#1e6174] transition duration-150 ease-in-out">
                                     Draw / Update Signature
                                 </button>
+                                <img id="signaturePreview" src="" alt="Client signature preview"
+                                    class="h-12 border border-gray-300 rounded-lg bg-white hidden">
                                 <button type="button" onclick="clearSavedSignature()"
                                     class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition duration-150 ease-in-out">
                                     Remove Signature
@@ -331,6 +333,7 @@
     const ctx = canvas.getContext('2d');
     const signatureInput = document.getElementById('client-signature');
     const signatureStatus = document.getElementById('signatureStatus');
+    const signaturePreview = document.getElementById('signaturePreview');
     let isDrawing = false;
     let currentColor = 'black';
     let currentWidth = 3;
@@ -419,6 +422,10 @@
         signatureStatus.textContent = 'Signature captured successfully.';
         signatureStatus.classList.remove('text-gray-500');
         signatureStatus.classList.add('text-green-700');
+        if (signaturePreview) {
+            signaturePreview.src = dataUrl;
+            signaturePreview.classList.remove('hidden');
+        }
         closeSignaturePopup();
     }
 
@@ -427,6 +434,10 @@
         signatureStatus.textContent = 'No signature captured yet.';
         signatureStatus.classList.remove('text-green-700');
         signatureStatus.classList.add('text-gray-500');
+        if (signaturePreview) {
+            signaturePreview.src = '';
+            signaturePreview.classList.add('hidden');
+        }
     }
 
     canvas.addEventListener('mousedown', startSignature);
