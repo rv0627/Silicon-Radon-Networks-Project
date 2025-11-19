@@ -23,10 +23,10 @@
                 <!--heading-->
                 <h1 class="text-3xl max-sm:text-2xl text-[#0B3037] text-center font-black">Log In Now</h1>
                 <!--inputs-->
-                <input type="email" name="email" id="email" placeholder="Enter your email"
+                <input type="email" name="email" id="email" placeholder="Enter your email" value="admin@gmail.com"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                 <div class="relative w-full">
-                    <input type="password" name="password" id="password" placeholder="Enter your password"
+                    <input type="password" name="password" id="password" placeholder="Enter your password" value="12345678"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 pr-10">
                     <button type="button" id="togglePassword"
                         class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500 hover:text-blue-600">
@@ -50,7 +50,7 @@
                 </span>
                 <!--login btn-->
                 <span class="flex justify-center">
-                    <button onclick="return Login()"
+                    <button type="button" onclick="return Login()"
                         class="rounded-full bg-[#0B3037] hover:scale-75 transition-all w-20 max-sm:text-sm aspect-square text-white">Login</button>
                 </span>
             </form>
@@ -74,14 +74,15 @@
         }
     });
     function Login() {
-        let email = document.getElementById("email").value;
-        let password = document.getElementById("password").value;
-        let retVal = false;
-        if (email == "admin@gmail.com" && password == "12345678") {
-            retVal = true;
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
+        if (email === "admin@gmail.com" && password === "12345678") {
             window.location.href = "main-panel/";
+            return true;
+        } else {
+            alert("Invalid credentials. Try admin@gmail.com / 12345678.");
+            return false;
         }
-        return retVal;
     }
 </script>
 
