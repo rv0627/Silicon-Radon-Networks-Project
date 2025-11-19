@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silicon Radon Networks | Projects</title>
+    <link rel="icon" href="./images/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link rel="stylesheet" href="../../../styles/common.css">
+
+    <style type="text/tailwindcss">
+        /* Custom styles for the form */
+        .form-input {
+            @apply w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#134E5E] focus:border-[#134E5E] shadow-sm;
+        }
+        .form-label {
+            @apply block text-sm font-medium text-gray-700 mb-1;
+        }
+        /* Custom styles for tabs */
+        .primary-color { @apply text-[#134E5E]; }
+        .primary-focus { @apply focus:ring-[#134E5E] focus:border-[#134E5E]; }
+        .tab-active { @apply border-[#134E5E] text-[#134E5E] font-semibold; }
+    </style>
+</head>
+
+<body class="h-dvh flex flex-col">
+    <div
+        class="nav bg-[#134E5E] w-full h-[17dvh] max-sm:py-6 rounded-b-full flex justify-between pt-4 pb-4 items-center max-lg:justify-center max-lg:flex-col">
+        <span class="flex items-center gap-3 ml-20 max-lg:ml-0 max-sm:scale-75">
+            <button onclick="history.go ( -1);"
+                class="rounded-full w-[50px] aspect-square bg-white flex justify-center items-center hover:scale-90 transition-all">
+                <img src="../../../images/common/go-back.png" alt="go-back" class="scale-75">
+            </button>
+            <button onclick="window.location.href = '../../../main-panel/';"
+                class="p-2 primary-color rounded-lg bg-white flex gap-3 justify-center items-center hover:scale-90 transition-all">
+                <img src="../../../images/common/go-to-main.png" alt="go-to-main">
+                Go to Main Panel
+            </button>
+        </span>
+        <span class="flex items-center gap-3 mr-20 max-lg:mr-0 max-sm:scale-75">
+            <h3 class="text-2xl max-md:text-sm text-white">Welcome Sahan Ranawaka</h3>
+            <button onclick="window.location.href = '../../../';"
+                class="rounded-full w-[50px] aspect-square bg-white flex justify-center items-center hover:scale-90 transition-all">
+                <img src="../../../images/common/logout.png" alt="logout">
+            </button>
+        </span>
+    </div>
+
+    <div class="flex-grow flex flex-col">
+        
+        <div class="px-12 max-sm:px-6 py-5">
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                    <li class="inline-flex items-center">
+                        <p class="inline-flex items-center text-sm font-medium text-gray-700">
+                            <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
+                            </svg>
+                            Main Panel
+                        </p>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 9 4-4-4-4" />
+                            </svg>
+                            <p class="ms-1 text-sm font-medium text-gray-700 md:ms-2">Projects</p>
+                        </div>
+                    </li>
+                    <li aria-current="page">
+                        <div class="flex items-center">
+                            <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 9 4-4-4-4" />
+                            </svg>
+                            <p class="ms-1 text-sm font-medium primary-color md:ms-2">Edit Project: PRJ-456</p>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+            <h1 class="text-xl sm:text-2xl font-bold text-center text-gray-800 mt-8 mb-4">Edit Project Details for <span
+                    class="primary-color">Q3 Marketing Campaign</span></h1>
+        </div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-4 border-b border-gray-200">
+                <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="projectTabs" role="tablist">
+                    <li class="mr-2" role="presentation">
+                        <button id="details-tab" data-target="details" class="inline-block p-4 border-b-2 rounded-t-lg tab-active" type="button" role="tab" aria-selected="true">Project Details</button>
+                    </li>
+                    <li class="mr-2" role="presentation">
+                        <button id="notes-tab" data-target="notes" class="inline-block p-4 border-b-2 border-transparent text-gray-500 hover:text-gray-600 hover:border-gray-300" type="button" role="tab" aria-selected="false">Notes Log (2)</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="p-6 max-w-4xl mx-auto w-full flex-grow">
+            <div id="tab-content" class="bg-white rounded-lg shadow-xl p-6">
+                
+                <div id="details" role="tabpanel" aria-labelledby="details-tab">
+                    <h2 class="primary-color font-semibold text-lg mb-2">Edit Project Information</h2>
+
+                    <form>
+                        <div class="flex flex-col border-2 border-gray-100 rounded-lg p-6">
+                            
+                            <h3 class="primary-color font-semibold text-base mb-2">Visit Details</h3>
+                            <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                <div>
+                                    <label for="visit-date" class="form-label">Visit Date <span class="text-red-500">*</span></label>
+                                    <input type="date" id="visit-date" name="visit-date"
+                                        class="form-input bg-gray-50 cursor-not-allowed" value="2025-11-15" readonly>
+                                </div>
+                                <div>
+                                    <label for="visit-type" class="form-label">Visit Type <span class="text-red-500">*</span></label>
+                                    <select name="visit-type" id="visit-type" class="form-input appearance-none bg-white">
+                                        <option value="visit" selected>Visit</option>
+                                        <option value="cancel">Cancel</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <hr class="my-4 border-gray-200">
+                            
+                            <h3 class="primary-color font-semibold text-base mb-4">Business Details</h3>
+                            <div class="grid gap-6 mb-6 md:grid-cols-2">
+                                <div class="mb-4">
+                                    <label for="business-name" class="form-label">Business Name <span class="text-red-500">*</span></label>
+                                    <input type="text" id="business-name" name="business-name" class="form-input"
+                                        placeholder="Enter business name" value="GlobalTech Solutions">
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="location-btn" class="form-label">Location <span class="text-red-500">*</span></label>
+                                    <button id="location-btn" type="button"
+                                        class="w-full sm:w-auto bg-[#134E5E] hover:bg-[#1e6174] text-white font-bold py-2 px-4 rounded-lg transition duration-150 ease-in-out">
+                                        Track Location
+                                    </button>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="address" class="form-label">Address <span class="text-red-500">*</span></label>
+                                    <input type="text" id="address" class="form-input" placeholder="" value="123 Industrial Park, Colombo">
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="city" class="form-label">City <span class="text-red-500">*</span></label>
+                                    <input type="text" id="city" class="form-input" placeholder="" value="Colombo">
+                                </div>
+                            </div>
+
+                            <label class="form-label">Image of the Shop</label>
+                            <div class="flex items-center justify-center w-full mb-6">
+                                <label for="dropzone-file"
+                                    class="flex flex-col items-center justify-center w-full flex-grow border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 h-32">
+                                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                        <p class="mb-2 text-sm font-semibold text-gray-900">Image Already Uploaded</p>
+                                        <p class="text-xs text-gray-500 ">Click to change (SVG, PNG, JPG)</p>
+                                    </div>
+                                    <input id="dropzone-file" type="file" class="hidden" />
+                                </label>
+                            </div>
+
+                            <hr class="my-4 border-gray-200">
+                            
+                            <h3 class="primary-color font-semibold text-base mb-4">Business Contact Details</h3>
+                            <section class="grid gap-6 mb-6 md:grid-cols-2">
+                                <div class="mb-4">
+                                    <label for="contact-person" class="form-label">Contact Person</label>
+                                    <input type="text" id="contact-person" class="form-input" placeholder="" value="Mr. John Smith">
+                                </div>
+                                <div class="mb-4">
+                                    <label for="contact-no-1" class="form-label">Contact No. 1 <span class="text-red-500">*</span></label>
+                                    <input type="tel" id="contact-no-1" class="form-input" placeholder="" value="0771234567">
+                                </div>
+                                <div class="mb-4">
+                                    <label for="contact-no-2" class="form-label">Contact No. 2</label>
+                                    <input type="tel" id="contact-no-2" class="form-input" placeholder="" value="0118765432">
+                                </div>
+                            </section>
+
+                            <hr class="my-4 border-gray-200">
+                            
+                            <h3 class="primary-color font-semibold text-base mb-4">Products Offered</h3>
+                            <section class="mb-6">
+                                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                                    <div class="flex items-center">
+                                        <input id="mini" type="checkbox" checked
+                                            class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                                        <label for="mini" class="ml-2 text-gray-700">Mini</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="pin-pad" type="checkbox"
+                                            class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                                        <label for="pin-pad" class="ml-2 text-gray-700">Pin Pad</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="tap" type="checkbox" checked
+                                            class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                                        <label for="tap" class="ml-2 text-gray-700">TAP</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="pay-links" type="checkbox" checked
+                                            class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                                        <label for="pay-links" class="ml-2 text-gray-700">Pay Links</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="ipg" type="checkbox"
+                                            class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                                        <label for="ipg" class="ml-2 text-gray-700">IPG</label>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <hr class="my-4 border-gray-200">
+                            
+                            <h3 class="primary-color font-semibold text-base mb-4">Conclusion</h3>
+                            <section class="grid gap-6 mb-6 md:grid-cols-2">
+                                <div class="mb-1">
+                                    <label for="visit-status" class="form-label">Visit Status</label>
+                                    <select id="visit-status" class="form-input appearance-none bg-white">
+                                        <option value="done" selected>Done</option>
+                                        <option value="pending">Pending</option>
+                                        <option value="rejected">Rejected</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-1">
+                                    <label for="agent-comment" class="form-label">Agent Comment</label>
+                                    <input type="text" id="agent-comment" class="form-input" placeholder="" value="Client is ready to move forward.">
+                                </div>
+
+                                <div class="mb-1 w-full md:col-span-2">
+                                    <label for="remark" class="form-label">Remark</label>
+                                    <textarea id="remark" class="form-input h-24 resize-none" placeholder="">Follow up needed in 3 days for contract signing.</textarea>
+                                </div>
+                            </section>
+                            
+                        </div>
+
+                        <footer class="sticky bottom-0 bg-white border-t border-gray-200 shadow-lg p-4 z-20 mt-4">
+                            <div class="max-w-4xl mx-auto flex justify-between sm:justify-center space-x-4">
+                                <button type="submit"
+                                    class="w-1/2 sm:w-40 bg-[#0B3037] hover:bg-[#143e46] text-white font-bold py-3 rounded-lg transition duration-150 ease-in-out shadow-md">
+                                    Update Project
+                                </button>
+                                <button type="reset"
+                                    class="w-1/2 sm:w-40 bg-[#134E5E] hover:bg-[#1e6174] text-white font-bold py-3 rounded-lg transition duration-150 ease-in-out shadow-md">
+                                    Reset
+                                </button>
+                            </div>
+                        </footer>
+                    </form>
+                </div>
+                
+                <div id="notes" role="tabpanel" aria-labelledby="notes-tab" class="hidden">
+                    <h2 class="primary-color font-semibold text-lg mb-4">Add New Note</h2>
+
+                    <form action="#" method="POST" class="mb-8 p-4 border border-gray-200 rounded-lg bg-gray-50">
+                        <label for="new-note" class="block text-sm font-medium text-gray-700 mb-2">Note Content</label>
+                        <textarea id="new-note" name="new-note" rows="3" class="form-input resize-none" placeholder="Enter status updates, meeting summaries, or important reminders..."></textarea>
+                        
+                        <div class="mt-4 flex justify-end">
+                            <button type="submit" class="py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-[#0B3437] hover:bg-[#12555a] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-150">
+                                Add Note
+                            </button>
+                        </div>
+                    </form>
+
+                    <h2 class="primary-color font-semibold text-lg mb-4 border-b pb-2">Previous Notes</h2>
+
+                    <div class="mb-4 p-4 border border-gray-100 rounded-lg shadow-sm bg-white">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-sm font-semibold text-gray-900">Sahan Ranawaka</span>
+                            <span class="text-xs text-gray-500">2025-11-18 at 10:30 AM</span>
+                        </div>
+                        <p class="text-gray-700 text-sm">Initial client brief received. Discussed payment options including Mini and TAP solutions.</p>
+                    </div>
+
+                    <div class="mb-4 p-4 border border-gray-100 rounded-lg shadow-sm bg-white">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-sm font-semibold text-gray-900">Sahan Ranawaka</span>
+                            <span class="text-xs text-gray-500">2025-11-15 at 04:15 PM</span>
+                        </div>
+                        <p class="text-gray-700 text-sm">Follow-up visit successful. Client confirmed interest. Need to process paperwork next week.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer
+            class="h-[80px] bg-[#134E5E] max-md:text-sm max-sm:text-xs max-md:flex-col text-center w-full flex items-center text-white justify-center gap-3">
+            <p>2025 © All Rights Reserved | Powered by Silicon Radon Networks (Pvt) Ltd</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabsContainer = document.getElementById('projectTabs');
+            const tabsContent = {
+                'details': document.getElementById('details'),
+                'notes': document.getElementById('notes')
+            };
+
+            const toggleTabs = (targetTab) => {
+                // 1. Deactivate all tabs and hide all content
+                Array.from(tabsContainer.querySelectorAll('button')).forEach(btn => {
+                    btn.classList.remove('tab-active');
+                    btn.classList.add('border-transparent', 'text-gray-500', 'hover:text-gray-600', 'hover:border-gray-300');
+                });
+                Object.values(tabsContent).forEach(content => {
+                    content.classList.add('hidden');
+                });
+
+                // 2. Activate the clicked tab and show content
+                const targetButton = document.querySelector(`[data-target="${targetTab}"]`);
+                if (targetButton) {
+                    targetButton.classList.add('tab-active');
+                    targetButton.classList.remove('border-transparent', 'text-gray-500', 'hover:text-gray-600', 'hover:border-gray-300');
+                }
+                
+                if (tabsContent[targetTab]) {
+                    tabsContent[targetTab].classList.remove('hidden');
+                }
+            };
+
+            tabsContainer.addEventListener('click', (e) => {
+                const targetButton = e.target.closest('button');
+                if (!targetButton) return;
+                
+                const targetTab = targetButton.getAttribute('data-target');
+                toggleTabs(targetTab);
+            });
+            
+            // Set initial active tab on load
+            toggleTabs('details');
+        });
+        
+        function locatePanelItem(panelItem) {
+            window.location.href = "../" + panelItem + "/";
+        }
+    </script>
+</body>
+
+</html>

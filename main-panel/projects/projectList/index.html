@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silicon Radon Networks | Projects</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style type="text/tailwindcss">
+        /* Custom colors and input styling */
+        .primary-bg { @apply bg-[#134E5E]; }
+        .primary-text { @apply text-[#134E5E]; }
+        .search-input {
+            @apply w-full py-2 pr-3 pl-12 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#134E5E] focus:border-[#134E5E] shadow-sm;
+        }
+        /* Custom styles for modal */
+        .form-input-view {
+            @apply w-full p-2 border border-gray-200 rounded-lg bg-gray-50 text-gray-700 min-h-10;
+        }
+        .tab-active { @apply border-[#134E5E] text-[#134E5E] font-semibold; }
+        .tab-inactive { @apply border-transparent text-gray-500 hover:text-gray-600 hover:border-gray-300; }
+    </style>
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+
+    <div
+        class="nav bg-[#134E5E] w-full h-1/6 space-y-5 pb-7 max-lg:h-[17dvh] max-sm:py-6 rounded-b-full flex justify-between items-center max-lg:justify-center max-lg:flex-col">
+        <span class="flex items-center gap-3 ml-20 max-lg:ml-0 max-sm:scale-75">
+            <button onclick="history.go ( -1);"
+                class="rounded-full w-[50px] aspect-square bg-white flex justify-center items-center hover:scale-90 transition-all">
+                <img src="../../../images/common/go-back.png" alt="go-back" class="scale-75">
+            </button>
+            <button onclick="window.location.href = '../../../main-panel/';"
+                class="p-2 text-[#134E5E] rounded-lg bg-white flex gap-3 justify-center items-center hover:scale-90 transition-all">
+                <img src="../../../images/common/go-to-main.png" alt="go-to-main">
+                Go to Main Panel
+            </button>
+        </span>
+        <span class="flex items-center gap-3 mr-20 max-lg:mr-0 max-sm:scale-75">
+            <h3 class="text-2xl max-md:text-sm text-white">Welcome Sahan Ranawaka</h3>
+            <button onclick="window.location.href = '../../../';"
+                class="rounded-full w-[50px] aspect-square bg-white flex justify-center items-center hover:scale-90 transition-all">
+                <img src="../../../images/common/logout.png" alt="logout">
+            </button>
+        </span>
+    </div>
+
+    <div class="px-12 max-sm:px-6 py-5">
+        <nav class="flex" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                <li class="inline-flex items-center">
+                    <p class="inline-flex items-center text-sm font-medium text-gray-700">
+                        <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
+                        </svg>
+                        Main Panel
+                    </p>
+                </li>
+                <li>
+                    <div class="flex items-center">
+                        <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 9 4-4-4-4" />
+                        </svg>
+                        <p class="ms-1 text-sm font-medium text-gray-700 md:ms-2">Projects</p>
+                    </div>
+                </li>
+                <li aria-current="page">
+                    <div class="flex items-center">
+                        <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 9 4-4-4-4" />
+                        </svg>
+                        <p class="ms-1 text-sm font-medium primary-text md:ms-2">Projects List</p>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+    </div>
+
+    <main class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+        <h1 class="text-3xl font-extrabold text-gray-900 mb-6">Project List</h1>
+
+        <div
+            class="flex flex-col sm:flex-row justify-between items-center bg-white p-4 rounded-lg shadow-md mb-6 space-y-4 sm:space-y-0 sm:space-x-4">
+            <div class="relative w-full sm:w-80">
+                <input type="text" placeholder="Search projects by name, status..." class="search-input">
+                <svg class="pointer-events-none absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"
+                    fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+            </div>
+
+            <button onclick="locatePanelItem('addProject');"
+                class="w-full sm:w-auto flex items-center justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-[#0B3037] hover:bg-[#174953] transition duration-150">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                </svg>
+                Add New Project
+            </button>
+        </div>
+
+        <div class="bg-white shadow-xl rounded-lg overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 hidden sm:table">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Project Name</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Client</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Status</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Start
+                            Date</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Q3 Marketing Campaign
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">GlobalTech Inc.</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span
+                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                Completed
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2025-07-01</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <a href="#" onclick="openProjectModal('project-1')" class="text-blue-600 hover:text-blue-900 mr-3">View</a>
+                            <a href="#" onclick="locatePanelItem('editProject');"
+                                class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">New Product Feature V2
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">In-house</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span
+                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                In Progress
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2025-09-15</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <a href="#" onclick="openProjectModal('project-2')" class="text-blue-600 hover:text-blue-900 mr-3">View</a>
+                            <a href="#" onclick="locatePanelItem('editProject');"
+                                class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Server Migration Plan
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">DataCorp Ltd.</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span
+                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                Delayed
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2025-10-20</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <a href="#" onclick="openProjectModal('project-3')" class="text-blue-600 hover:text-blue-900 mr-3">View</a>
+                            <a href="#" onclick="locatePanelItem('editProject');"
+                                class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="sm:hidden divide-y divide-gray-200">
+                <div class="p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <p class="text-lg font-bold text-gray-900">Q3 Marketing Campaign</p>
+                        <span
+                            class="px-2 py-0.5 text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                            Completed
+                        </span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-1">Client: GlobalTech Inc.</p>
+                    <p class="text-sm text-gray-600 mb-3">Start Date: 2025-07-01</p>
+                    <div class="flex space-x-4">
+                        <a href="#" onclick="openProjectModal('project-1')" class="text-sm font-medium text-blue-600 hover:text-blue-900">View Details</a>
+                        <a href="#" onclick="locatePanelItem('editProject');" class="text-sm font-medium text-indigo-600 hover:text-indigo-900">Edit</a>
+                    </div>
+                </div>
+                </div>
+        </div>
+
+        <div
+            class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6 mt-4 rounded-lg shadow-md">
+            <div class="flex-1 flex justify-between sm:hidden">
+                <a href="#"
+                    class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                    Previous
+                </a>
+                <a href="#"
+                    class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                    Next
+                </a>
+            </div>
+            <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                <div>
+                    <p class="text-sm text-gray-700">
+                        Showing
+                        <span class="font-medium">1</span>
+                        to
+                        <span class="font-medium">10</span>
+                        of
+                        <span class="font-medium">52</span>
+                        results
+                    </p>
+                </div>
+                <div>
+                    <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                        <a href="#"
+                            class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                            <span class="sr-only">Previous</span>
+                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                        <a href="#" aria-current="page"
+                            class="z-10 bg-blue-50 border-blue-500 text-blue-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium">1</a>
+                        <a href="#"
+                            class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">2</a>
+                        <a href="#"
+                            class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">3</a>
+                        <a href="#"
+                            class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                            <span class="sr-only">Next</span>
+                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer
+        class="h-[80px] bg-[#134E5E] max-md:text-sm max-sm:text-xs max-md:flex-col text-center w-full flex items-center text-white justify-center gap-3">
+        <p>2025 © All Rights Reserved | Powered by Silicon Radon Networks (Pvt) Ltd</p>
+    </footer>
+
+    <div id="project-modal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="flex items-center justify-center min-h-screen p-4 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" onclick="closeModal()"></div>
+
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-xl lg:max-w-3xl w-full">
+                
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 flex justify-between items-center border-b border-gray-200">
+                    <h3 class="text-lg leading-6 font-bold text-gray-900" id="modal-title">Project Details: <span id="modal-business-name-display"></span></h3>
+                    <button type="button" class="text-gray-400 hover:text-gray-500 focus:outline-none" onclick="closeModal()">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                    </button>
+                </div>
+
+                <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="mb-4 border-b border-gray-200">
+                        <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="modalTabs" role="tablist">
+                            <li class="mr-2" role="presentation">
+                                <button data-tab="modal-details" class="inline-block p-2 border-b-2 rounded-t-lg tab-active" type="button" onclick="switchModalTab('modal-details')">Details</button>
+                            </li>
+                            <li class="mr-2" role="presentation">
+                                <button data-tab="modal-products" class="inline-block p-2 border-b-2 tab-inactive" type="button" onclick="switchModalTab('modal-products')">Products</button>
+                            </li>
+                            <li class="mr-2" role="presentation">
+                                <button data-tab="modal-conclusion" class="inline-block p-2 border-b-2 tab-inactive" type="button" onclick="switchModalTab('modal-conclusion')">Conclusion</button>
+                            </li>
+                            <li class="mr-2" role="presentation">
+                                <button data-tab="modal-notes" class="inline-block p-2 border-b-2 tab-inactive" type="button" onclick="switchModalTab('modal-notes')">Notes Log</button>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div id="modal-content-container">
+                        
+                        <div id="modal-details" class="modal-tab-content">
+                            <h4 class="text-base font-semibold primary-text mb-3">Visit & Business Information</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                                <div><label class="font-medium text-gray-600">Visit Date:</label><p id="modal-visit-date" class="form-input-view"></p></div>
+                                <div><label class="font-medium text-gray-600">Visit Type:</label><p id="modal-visit-type" class="form-input-view"></p></div>
+                                
+                                <div class="md:col-span-2"><label class="font-medium text-gray-600">Address:</label><p id="modal-address" class="form-input-view"></p></div>
+                                <div><label class="font-medium text-gray-600">City:</label><p id="modal-city" class="form-input-view"></p></div>
+                                <div><label class="font-medium text-gray-600">Contact Person:</label><p id="modal-contact-person" class="form-input-view"></p></div>
+                                <div><label class="font-medium text-gray-600">Contact No. 1:</label><p id="modal-contact-no-1" class="form-input-view"></p></div>
+                                <div><label class="font-medium text-gray-600">Contact No. 2:</label><p id="modal-contact-no-2" class="form-input-view"></p></div>
+                                <div class="md:col-span-2"><label class="font-medium text-gray-600">Image Status:</label><p id="modal-image-status" class="form-input-view">Image uploaded successfully</p></div>
+                            </div>
+                        </div>
+
+                        <div id="modal-products" class="modal-tab-content hidden">
+                            <h4 class="text-base font-semibold primary-text mb-3">Products Selected</h4>
+                            <div id="modal-products-list" class="space-y-2 text-sm">
+                                </div>
+                        </div>
+                        
+                        <div id="modal-conclusion" class="modal-tab-content hidden">
+                            <h4 class="text-base font-semibold primary-text mb-3">Visit Outcome</h4>
+                            <div class="grid grid-cols-1 gap-4 text-sm">
+                                <div><label class="font-medium text-gray-600">Visit Status:</label><p id="modal-visit-status" class="form-input-view"></p></div>
+                                <div><label class="font-medium text-gray-600">Agent Comment:</label><p id="modal-agent-comment" class="form-input-view"></p></div>
+                                <div><label class="font-medium text-gray-600">Remark:</label><p id="modal-remark" class="form-input-view h-24 overflow-y-auto"></p></div>
+                            </div>
+                        </div>
+
+                        <div id="modal-notes" class="modal-tab-content hidden">
+                            <h4 class="text-base font-semibold primary-text mb-3">Notes & Communication</h4>
+                            <div id="notes-list" class="space-y-4">
+                                </div>
+                            <p class="text-sm text-gray-500 mt-4">For adding new notes, please use the 'Edit Project' button.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button type="button" onclick="closeModal()"
+                        class="w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none sm:w-auto sm:text-sm">
+                        Close
+                    </button>
+                    <a href="#" id="modal-edit-btn"
+                        class="mt-3 sm:mt-0 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none sm:mr-3 sm:w-auto sm:text-sm">
+                        Edit Project
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // --- Static/Mock Data for Project List Demonstration ---
+        const projectData = {
+            'project-1': { 
+                businessName: 'Q3 Marketing Campaign', visitDate: '2025-07-01', visitType: 'Visit', address: '123 Tech Park', city: 'Colombo',
+                contactPerson: 'Jane Doe', contactNo1: '0771112223', contactNo2: '', 
+                products: ['Mini', 'TAP', 'Pay Links'], 
+                visitStatus: 'Completed', agentComment: 'Client happy with payment terms.', remark: 'Final contract signed.',
+                notes: [ {user: 'Sahan', date: '2025-06-25', content: 'Initial call completed.'}, ],
+                imageStatus: 'Image uploaded successfully'
+            },
+            'project-2': { 
+                businessName: 'New Product Feature V2', visitDate: '2025-09-15', visitType: 'Visit', address: '456 Innovation Hub', city: 'Kandy',
+                contactPerson: 'Ali Khan', contactNo1: '0714445556', contactNo2: '0119876543', 
+                products: ['Pin Pad', 'IPG'], 
+                visitStatus: 'Pending', agentComment: 'Client needs management approval.', remark: 'Follow up next week.',
+                notes: [ {user: 'Sahan', date: '2025-09-10', content: 'Presented product V2 demo.'} ],
+                imageStatus: 'No image uploaded'
+            },
+            'project-3': { 
+                businessName: 'Server Migration Plan', visitDate: '2025-10-20', visitType: 'Cancel', address: '789 Data Center', city: 'Galle',
+                contactPerson: 'Cynthia Perera', contactNo1: '0767778889', contactNo2: '', 
+                products: [], 
+                visitStatus: 'Rejected', agentComment: 'Cancelled due to budget constraints.', remark: 'Remove from active pipeline.',
+                notes: [ {user: 'Sahan', date: '2025-10-15', content: 'Cancellation notice sent.'} ],
+                imageStatus: 'Image required but missing'
+            },
+        };
+
+        function locatePanelItem(panelItem) {
+            window.location.href = "../" + panelItem + "/";
+        }
+        
+        // --- Modal Control Functions ---
+
+        function closeModal() {
+            document.getElementById('project-modal').classList.add('hidden');
+        }
+        
+        function switchModalTab(targetTabId) {
+            const tabButtons = document.querySelectorAll('#modalTabs button');
+            const tabContents = document.querySelectorAll('#modal-content-container > div');
+            
+            tabButtons.forEach(btn => {
+                if (btn.getAttribute('data-tab') === targetTabId) {
+                    btn.classList.add('tab-active');
+                    btn.classList.remove('tab-inactive');
+                } else {
+                    btn.classList.remove('tab-active');
+                    btn.classList.add('tab-inactive');
+                }
+            });
+
+            tabContents.forEach(content => {
+                if (content.id === targetTabId) {
+                    content.classList.remove('hidden');
+                } else {
+                    content.classList.add('hidden');
+                }
+            });
+        }
+
+        // --- Main function to open modal with data ---
+
+        function openProjectModal(projectId) {
+            const modal = document.getElementById('project-modal');
+            const data = projectData[projectId];
+
+            if (!data) {
+                console.error("Project data not found for ID:", projectId);
+                return;
+            }
+
+            // 1. Populate Header and Details Tab
+            document.getElementById('modal-business-name-display').textContent = data.businessName;
+            document.getElementById('modal-visit-date').textContent = data.visitDate;
+            document.getElementById('modal-visit-type').textContent = data.visitType;
+            document.getElementById('modal-address').textContent = data.address;
+            document.getElementById('modal-city').textContent = data.city;
+            document.getElementById('modal-contact-person').textContent = data.contactPerson;
+            document.getElementById('modal-contact-no-1').textContent = data.contactNo1;
+            document.getElementById('modal-contact-no-2').textContent = data.contactNo2;
+            document.getElementById('modal-image-status').textContent = data.imageStatus;
+            
+            // 2. Populate Products Tab
+            const productsListDiv = document.getElementById('modal-products-list');
+            productsListDiv.innerHTML = '';
+            
+            if (data.products && data.products.length > 0) {
+                data.products.forEach(product => {
+                    const listItem = document.createElement('p');
+                    listItem.className = 'px-3 py-1 bg-blue-50 text-blue-800 rounded-lg inline-block mr-2 text-xs font-medium';
+                    listItem.textContent = product;
+                    productsListDiv.appendChild(listItem);
+                });
+            } else {
+                productsListDiv.innerHTML = '<p class="text-gray-500">No products were selected.</p>';
+            }
+
+            // 3. Populate Conclusion Tab
+            document.getElementById('modal-visit-status').textContent = data.visitStatus;
+            document.getElementById('modal-agent-comment').textContent = data.agentComment;
+            document.getElementById('modal-remark').textContent = data.remark;
+
+            // 4. Populate Notes Log Tab
+            const notesList = document.getElementById('notes-list');
+            notesList.innerHTML = ''; 
+            if (data.notes && data.notes.length > 0) {
+                data.notes.forEach(note => {
+                    const noteHtml = `
+                        <div class="p-3 border border-gray-200 rounded-lg bg-gray-50">
+                            <div class="flex justify-between items-center text-xs text-gray-500 mb-1">
+                                <span class="font-semibold text-gray-800">${note.user}</span>
+                                <span>${note.date}</span>
+                            </div>
+                            <p class="text-sm text-gray-700">${note.content}</p>
+                        </div>
+                    `;
+                    notesList.insertAdjacentHTML('beforeend', noteHtml);
+                });
+            } else {
+                notesList.innerHTML = '<p class="text-gray-500">No notes recorded for this project.</p>';
+            }
+
+            // 5. Update Edit button link
+            const editBtn = document.getElementById('modal-edit-btn');
+            editBtn.onclick = () => { closeModal(); locatePanelItem('editProject'); }; 
+
+
+            // 6. Show Modal and set initial tab
+            switchModalTab('modal-details'); 
+            modal.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tele Tech Electronics | Main Panel</title>
+    <link rel="icon" href="./images/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../styles/common.css">
+    <style>
+        /*border animation (main panel cards)*/
+        .border-animated {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            border-radius: 20px;
+            /* background: #0B3037; */
+            overflow: hidden;
+            display: grid;
+            place-items: center;
+            /* 3D shadow layers */
+            box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.1),
+                inset 4px 4px 12px rgba(0, 0, 0, 0.6), 0 10px 20px rgba(0, 0, 0, 0.5);
+
+            /* subtle 3D illusion */
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transition: transform 0.3s ease;
+        }
+
+        .border-animated::before {
+            content: "";
+            position: absolute;
+            width: 40%;
+            height: 150%;
+            background: linear-gradient(120deg, #134E5E, #0B3037, #134E5E);
+            transform-origin: center;
+            z-index: 1;
+            opacity: 0;
+            /* Hidden by default */
+            transition: opacity 0.5s ease;
+            /* Smooth opacity transition */
+        }
+
+        .border-animated:hover::before {
+            opacity: 1;
+            /* Show gradient on hover */
+            animation: glowing 5s linear infinite;
+            /* Animation only on hover */
+        }
+
+        .border-animated .card {
+            width: 95%;
+            height: 95%;
+            height: 190px !important;
+            background: linear-gradient(145deg, #0B3037, #134E5E);
+            border-radius: 20px;
+            z-index: 2;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center !important;
+            align-items: center;
+            box-shadow:
+                inset 8px 8px 16px rgba(11, 48, 55, 0.6),
+                inset -8px -8px 16px rgba(19, 78, 94, 0.4),
+                0 15px 25px rgba(0, 0, 0, 0.35);
+        }
+
+        .border-animated:hover {
+            transform: rotateX(3deg) rotateY(-3deg);
+        }
+
+        @keyframes glowing {
+            0% {
+                transform: rotate(0);
+                filter: hue-rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+                filter: hue-rotate(45deg);
+            }
+        }
+    </style>
+</head>
+
+<body class="h-dvh max-md:h-fit">
+    <!--Nav-->
+    <div
+        class="nav bg-[#134E5E] w-full h-1/6 max-lg:h-[17dvh] max-sm:py-6 rounded-b-full flex justify-end items-center max-sm:justify-center">
+        <span class="flex gap-3 sm:mr-20 items-center">
+            <!--Logged User-->
+            <h3 class="text-2xl max-sm:text-sm text-white max-sm:mr-0">Welcome Sahan Ranawaka</h3>
+            <!--log out btn-->
+            <button onclick="window.location.href = '../';"
+                class="rounded-full w-[50px] aspect-square bg-white flex justify-center items-center hover:scale-90 transition-all">
+                <img src="../images/common/logout.png" alt="logout">
+        </span>
+        </button>
+    </div>
+    <!--center-->
+    <div class="grid place-items-center h-5/6 w-full">
+        <!--Main Panel (for max-lg)-->
+        <div
+            class="hidden max-lg:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 w-fit  h-fit py-6 text-white px-12">
+            <div onclick="locatePanelItem('dash');"
+                class="border-animated w-[200px] max-lg:w-[150px] h-[200px] max-lg:h-[150px] rounded-lg hover:scale-90 transition-all cursor-pointer uppercase lg:text-xl">
+                <div class="card w-full h-full bg-[#0B3037] rounded-lg flex flex-col gap-3 justify-center items-center">
+                    <img src="../images/main-panel/btn-icons/dash.svg"
+                        class="w-[105px] h-[105px] max-lg:w-[70px] max-lg:h-[70px]" alt="">
+                    <p>Dashboard</p>
+                </div>
+            </div>
+
+            <div onclick="locatePanelItem('projects');"
+                class="border-animated w-[200px] max-lg:w-[150px] h-[200px] max-lg:h-[150px] rounded-lg hover:scale-90 transition-all cursor-pointer uppercase lg:text-xl">
+                <div class="card w-full h-full bg-[#0B3037] rounded-lg flex flex-col gap-3 justify-center items-center">
+                    <img src="../images/main-panel/btn-icons/billing.svg"
+                        class="w-[105px] h-[105px] max-lg:w-[70px] max-lg:h-[70px]" alt="">
+                    <p>Projects</p>
+                </div>
+            </div>
+            <div onclick="locatePanelItem('#');"
+                class="border-animated w-[200px] max-lg:w-[150px] h-[200px] max-lg:h-[150px] rounded-lg hover:scale-90 transition-all cursor-pointer uppercase lg:text-xl">
+                <div class="card w-full h-full bg-[#0B3037] rounded-lg flex flex-col gap-3 justify-center items-center">
+                    <img src="../images/main-panel/btn-icons/customer.svg"
+                        class="w-[105px] h-[105px] max-lg:w-[70px] max-lg:h-[70px]" alt="">
+                    <p>Agent</p>
+                </div>
+            </div>
+            <div onclick="locatePanelItem('#');"
+                class="border-animated w-[200px] max-lg:w-[150px] h-[200px] max-lg:h-[150px] rounded-lg hover:scale-90 transition-all cursor-pointer uppercase lg:text-xl">
+                <div class="card w-full h-full bg-[#0B3037] rounded-lg flex flex-col gap-3 justify-center items-center">
+                    <img src="../images/main-panel/btn-icons/settings.svg"
+                        class="w-[105px] h-[105px] max-lg:w-[70px] max-lg:h-[70px]" alt="">
+                    <p>Settings</p>
+                </div>
+            </div>
+        </div>
+        <!--Main Panel (for lg)-->
+        <div class="hidden lg:grid place-items-center w-full">
+            <div class="flex justify-center w-full">
+                <div class="grid grid-cols-4 gap-6 w-full max-w-5xl mx-auto py-3 text-white justify-items-center">
+                    <div onclick="locatePanelItem('dash');"
+                        class="border-animated w-[200px] max-xl:w-[150px] h-[200px] max-xl:h-[150px] rounded-lg hover:scale-90 transition-all cursor-pointer uppercase lg:text-xl">
+                        <div
+                            class="card w-full h-full bg-[#0B3037] rounded-lg flex flex-col gap-3 justify-center items-center">
+                            <img src="../images/main-panel/btn-icons/dash.svg"
+                                class="w-[105px] h-[105px] max-xl:w-[70px] max-xl:h-[70px]" alt="">
+                            <p>Dashboard</p>
+                        </div>
+                    </div>
+                    <div onclick="locatePanelItem('projects');"
+                        class="border-animated w-[200px] max-xl:w-[150px] h-[200px] max-xl:h-[150px] rounded-lg hover:scale-90 transition-all cursor-pointer uppercase lg:text-xl">
+                        <div
+                            class="card w-full h-full bg-[#0B3037] rounded-lg flex flex-col gap-3 justify-center items-center">
+                            <img src="../images/main-panel/btn-icons/billing.svg"
+                                class="w-[105px] h-[105px] max-xl:w-[70px] max-xl:h-[70px]" alt="">
+                            <p>Projects</p>
+                        </div>
+                    </div>
+                    <div onclick="locatePanelItem('#');"
+                        class="border-animated w-[200px] max-xl:w-[150px] h-[200px] max-xl:h-[150px] rounded-lg hover:scale-90 transition-all cursor-pointer uppercase lg:text-xl">
+                        <div
+                            class="card w-full h-full bg-[#0B3037] rounded-lg flex flex-col gap-3 justify-center items-center">
+                            <img src="../images/main-panel/btn-icons/users.svg"
+                                class="w-[105px] h-[105px] max-xl:w-[70px] max-xl:h:[70px]" alt="">
+                            <p>Agent</p>
+                        </div>
+                    </div>
+                    <div onclick="locatePanelItem('#');"
+                        class="border-animated w-[200px] max-xl:w-[150px] h-[200px] max-xl:h-[150px] rounded-lg hover:scale-90 transition-all cursor-pointer uppercase lg:text-xl">
+                        <div
+                            class="card w-full h-full bg-[#0B3037] rounded-lg flex flex-col gap-3 justify-center items-center">
+                            <img src="../images/main-panel/btn-icons/settings.svg"
+                                class="w-[105px] h-[105px] max-xl:w-[70px] max-xl:h-[70px]" alt="">
+                            <p>Settings</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+<script>
+    function locatePanelItem(panelItem) {
+        window.location.href = "../main-panel/" + panelItem;
+    }
+</script>
+
+</html>
