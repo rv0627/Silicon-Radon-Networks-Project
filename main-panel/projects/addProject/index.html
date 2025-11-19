@@ -17,6 +17,9 @@
         .form-label {
             @apply block text-sm font-medium text-gray-700 mb-1;
         }
+        .signature-canvas {
+            touch-action: none; /* Prevent scrolling when drawing on touch devices */
+        }
     </style>
 </head>
 
@@ -253,6 +256,26 @@
                         <label for="remark" class="form-label">Remark</label>
                         <textarea id="remark" class="form-input h-24 resize-none" placeholder=""></textarea>
                     </div>
+                    <div class="md:col-span-2 mb-1">
+                        <label class="form-label">Client Signature</label>
+                        <div class="flex flex-col gap-3">
+                            <div class="flex gap-3 flex-wrap">
+                                <button type="button" onclick="openSignaturePopup()"
+                                    class="px-4 py-2 bg-[#134E5E] text-white rounded-lg hover:bg-[#1e6174] transition duration-150 ease-in-out">
+                                    Draw / Update Signature
+                                </button>
+                                <button type="button" onclick="clearSavedSignature()"
+                                    class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition duration-150 ease-in-out">
+                                    Remove Signature
+                                </button>
+                            </div>
+                            <div id="signatureStatus"
+                                class="min-h-[60px] border border-dashed border-gray-300 rounded-lg bg-gray-50 flex items-center justify-center text-sm text-gray-500 px-4 py-2">
+                                No signature captured yet.
+                            </div>
+                            <input type="hidden" id="client-signature" name="client-signature">
+                        </div>
+                    </div>
                 </section>
 
 
@@ -279,7 +302,176 @@
         </footer>
     </div>
 
+    <!-- Signature Drawing Popup -->
+    <div id="signaturePopup" class="fixed inset-0 bg-black/40 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-xl mx-4">
+            <div class="flex justify-between items-center p-4 border-b border-gray-200">
+                <h2 class="text-xl font-bold text-gray-800">Client Signature</h2>
+                <button type="button" onclick="closeSignaturePopup()" class="text-gray-500 hover:text-gray-700 text-2xl leading-none">✕</button>
+            </div>
+            <canvas id="signatureCanvas"
+                class="signature-canvas w-full h-64 bg-white border-b border-gray-200 cursor-crosshair"></canvas>
+            <div class="flex flex-wrap gap-2 p-4">
+                <button type="button" onclick="setSignatureMode('black')"
+                    class="px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800">Draw</button>
+                <button type="button" onclick="setSignatureMode('white')"
+                    class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 border border-gray-300">Erase</button>
+                <button type="button" onclick="clearSignatureCanvas()"
+                    class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">Clear</button>
+                <button type="button" onclick="saveSignature()"
+                    class="px-4 py-2 bg-[#134E5E] text-white rounded-lg hover:bg-[#1e6174] ml-auto">Save</button>
+            </div>
+        </div>
+    </div>
+
 </body>
+<script>
+    const signaturePopup = document.getElementById('signaturePopup');
+    const canvas = document.getElementById('signatureCanvas');
+    const ctx = canvas.getContext('2d');
+    const signatureInput = document.getElementById('client-signature');
+    const signatureStatus = document.getElementById('signatureStatus');
+    let isDrawing = false;
+    let currentColor = 'black';
+    let currentWidth = 3;
+    let canvasReady = false;
+
+    function initSignatureCanvas() {
+        if (!canvas) return;
+        const ratio = window.devicePixelRatio || 1;
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * ratio;
+        canvas.height = rect.height * ratio;
+        ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+        ctx.fillStyle = 'white';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeStyle = currentColor;
+        ctx.lineWidth = currentWidth;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        canvasReady = true;
+    }
+
+    function getCanvasPosition(e) {
+        const rect = canvas.getBoundingClientRect();
+        return {
+            x: (e.clientX - rect.left),
+            y: (e.clientY - rect.top)
+        };
+    }
+
+    function startSignature(e) {
+        if (!canvasReady) return;
+        isDrawing = true;
+        const pos = getCanvasPosition(e);
+        ctx.beginPath();
+        ctx.moveTo(pos.x, pos.y);
+        drawSignature(e);
+    }
+
+    function drawSignature(e) {
+        if (!isDrawing || !canvasReady) return;
+        const pos = getCanvasPosition(e);
+        ctx.lineTo(pos.x, pos.y);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(pos.x, pos.y);
+    }
+
+    function stopSignature() {
+        isDrawing = false;
+    }
+
+    function setSignatureMode(color) {
+        currentColor = color;
+        currentWidth = color === 'black' ? 3 : 10;
+        ctx.strokeStyle = currentColor;
+        ctx.lineWidth = currentWidth;
+    }
+
+    function clearSignatureCanvas() {
+        if (!canvasReady) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = 'white';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function openSignaturePopup() {
+        signaturePopup.classList.remove('hidden');
+        setTimeout(initSignatureCanvas, 10);
+    }
+
+    function closeSignaturePopup() {
+        signaturePopup.classList.add('hidden');
+    }
+
+    function saveSignature() {
+        if (!canvasReady) return;
+        const tempCanvas = document.createElement('canvas');
+        tempCanvas.width = canvas.width;
+        tempCanvas.height = canvas.height;
+        const tempCtx = tempCanvas.getContext('2d');
+        tempCtx.fillStyle = 'white';
+        tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+        tempCtx.drawImage(canvas, 0, 0);
+        const dataUrl = tempCanvas.toDataURL('image/jpeg', 0.92);
+        signatureInput.value = dataUrl;
+        signatureStatus.textContent = 'Signature captured successfully.';
+        signatureStatus.classList.remove('text-gray-500');
+        signatureStatus.classList.add('text-green-700');
+        closeSignaturePopup();
+    }
+
+    function clearSavedSignature() {
+        signatureInput.value = '';
+        signatureStatus.textContent = 'No signature captured yet.';
+        signatureStatus.classList.remove('text-green-700');
+        signatureStatus.classList.add('text-gray-500');
+    }
+
+    canvas.addEventListener('mousedown', startSignature);
+    canvas.addEventListener('mousemove', drawSignature);
+    canvas.addEventListener('mouseup', stopSignature);
+    canvas.addEventListener('mouseout', stopSignature);
+
+    canvas.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        const touch = e.touches[0];
+        const mouseEvent = new MouseEvent('mousedown', {
+            clientX: touch.clientX,
+            clientY: touch.clientY
+        });
+        canvas.dispatchEvent(mouseEvent);
+    }, { passive: false });
+
+    canvas.addEventListener('touchmove', (e) => {
+        e.preventDefault();
+        const touch = e.touches[0];
+        const mouseEvent = new MouseEvent('mousemove', {
+            clientX: touch.clientX,
+            clientY: touch.clientY
+        });
+        canvas.dispatchEvent(mouseEvent);
+    }, { passive: false });
+
+    canvas.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        const mouseEvent = new MouseEvent('mouseup', {});
+        canvas.dispatchEvent(mouseEvent);
+    }, { passive: false });
+
+    signaturePopup.addEventListener('click', (e) => {
+        if (e.target === signaturePopup) {
+            closeSignaturePopup();
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !signaturePopup.classList.contains('hidden')) {
+            closeSignaturePopup();
+        }
+    });
+</script>
 <script src="../../../scripts/common.js"></script>
 
 </html>
